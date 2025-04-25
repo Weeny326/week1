@@ -38,17 +38,77 @@ DeepSeek R1 (OpenRouter) / 500B / 정답률 30%, 속도: ...
 ...
 ---
 ```
+# 🗺️ 수도 맞히기 벤치마크 (LLM Capital Benchmark) _ 이주영
+
+## 🎯 목적 (Objective)
+대규모 언어 모델(Large Language Models, LLM)이 일반 상식, 특히 세계 국가들의 수도에 대한 지식 정확도를 평가합니다.
+
+## 🧪 테스트 방식 (Test Method)
+- 15개 국가명을 모델에게 입력하고 "[국가명]의 수도는 어디인가요?"라고 질문합니다.
+- 출력은 "국가명: 수도명" 형식으로 요청합니다.
+- 정확한 수도명을 답한 경우에만 정답 처리합니다.
+- 동일한 질문을 3~5개 LLM 모델에 적용합니다.
+
+## 📁 평가 데이터셋 (Evaluation Dataset)
+다음은 테스트에 사용된 15개 국가와 수도 목록입니다.
+
+| 국가 (Country) | 수도 (Capital) |
+|----------------|-----------------|
+| 대한민국       | 서울            |
+| 일본           | 도쿄            |
+| 미국           | 워싱턴 D.C.     |
+| 프랑스         | 파리            |
+| 독일           | 베를린          |
+| 캐나다         | 오타와          |
+| 이집트         | 카이로          |
+| 브라질         | 브라질리아      |
+| 중국           | 베이징          |
+| 인도           | 뉴델리          |
+| 호주           | 캔버라          |
+| 영국           | 런던            |
+| 러시아         | 모스크바        |
+| 이탈리아       | 로마            |
+| 스페인         | 마드리드        |
+
+## 📏 평가 기준 (Evaluation Metrics)
+- **정답률 (Accuracy)** = (맞힌 문항 수 / 총 문항 수) × 100%
+- **응답 속도 (Latency)** = 질문 후 응답까지 소요 시간 (평균, 초 단위)
+- **비용 (Cost)** = 사용된 토큰 수 및 API 과금 기준으로 계산
+
+## 🤖 평가 대상 모델 (Models Tested)
+- `GPT-4o` (ChatGPT, OpenAI)
+- `Gemini 1.5 Pro` (Google AI Studio)
+- `Gemini 1.5 Flash` (Google AI Studio)
+- `Claude 3 Sonnet` (Anthropic, claude.ai)
+- `DeepSeek R1` (OpenRouter)
+
+## 📊 결과 예시 (Example Results)
+
+| 모델명             | 정답률 | 평균 응답 시간 | 토큰 수 | 비용 (USD) |
+|---------------------|--------|----------------|----------|-------------|
+| GPT-4o              | 93%    | 7초            | 220      | $0.02       |
+| Gemini 1.5 Pro      | 100%   | 6초            | 180      | 무료        |
+| Claude 3 Sonnet     | 86%    | 5초            | N/A      | 무료        |
+| DeepSeek R1         | 66%    | 9초            | 260      | 무료        |
+
+## ✅ 사용 방법 (Usage Guide)
+1. 각 모델에 대해 동일한 15개 질문을 차례로 입력합니다.
+2. 응답 결과를 표 형식으로 정리합니다.
+3. 정답과 비교해 정확도를 계산합니다.
+4. 응답 시간, 토큰 수, 비용 등을 함께 기록합니다.
+
+## 📌 참고사항 (Notes)
+- 질문 형식을 통일해 공정성을 확보하세요 (예: "[국가명]의 수도는 어디인가요?").
+- 답변 형식은 "국가명: 수도명"으로 요청하여 파싱을 쉽게 만듭니다.
+- 자동화를 위해 Python + API(OpenAI, Google, etc)를 이용할 수 있습니다.
+- 결과를 기반으로 모델별 일반 상식 이해도 및 비용 효율성을 비교할 수 있습니다.
+
+---
+
+
+
 
 ### 두 번째 미션
-#### 개발자 전용: Gemini API를 이용한 PDF 데이터 정형화 추출
-* 과제 목표: Gemini API의 File API와 Structured Output 기능을 활용하여 PDF 문서에서 특정 데이터를 추출하고 Pydantic 모델로 구조화하는 방법을 이해하고 실습할 수 있습니다.
-* 요구 사항:
-  * Gemini API의 File API를 이용하여 PDF 파일을 업로드하고, Pydantic 모델을 정의하여 해당 PDF 파일에서 원하는 데이터를 정형화된 형태로 추출하는 코드를 작성합니다.
-  * 샘플 PDF 파일(invoice.pdf, handwriting_form.pdf) 또는 개인적으로 준비한 PDF 파일을 사용해도 좋습니다.
-  * 모델은 Gemini 2.5 Flash를 이용합니다.
-* 최종 결과물: 작성된 결과물을 Pull Request로 올려주세요.
-* 참고자료: Jupyter Notebook
-  * [Pdf_structured_outputs_on_invoices_and_forms.ipynb](docs/Pdf_structured_outputs_on_invoices_and_forms.ipynb)
 
 #### 기획자 전용: Vibe Coding으로 포트폴리오 사이트 만들기
 * 과제 목표: 개발자의 도움 없이도 바이브 코딩으로 프론트엔드를 만들어볼 수 있다.
